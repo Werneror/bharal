@@ -7,7 +7,8 @@
 import re
 import http.server
 from urllib import parse
-from mimetypes import types_map
+
+from publicsuffix2 import PublicSuffixList
 
 from settings import *
 from lib.proxy import Proxy
@@ -202,8 +203,8 @@ class BharalHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         :return:
         """
         domain = self.domain_re.match(string)
-        if domain is None or \
-                domain.group(1) in types_map:    # 若正则匹配出的域名的顶级域名是文件后缀，则认为它不是域名
+        psl = PublicSuffixList()
+        if domain is None or domain.group(1)[1:] not in psl.tlds:
             return False
         else:
             return True
