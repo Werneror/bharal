@@ -6,7 +6,7 @@
 
 ## 效果演示
 
-待添加。
+![demonstration](resources/demonstration.gif)
 
 ## 使用说明
 
@@ -21,7 +21,7 @@ git clone https://github.com/Werneror/bharal.git
 配置文件是`settings.py`，建议修改：
 
 - LOG_FILE: 日志文件路径
-- DOMAIN: 域名
+- DOMAIN: 域名，不正确设置会导致无法登录
 - PORT: 监听端口
 - USERS: 用户
 
@@ -46,8 +46,16 @@ python3 bharal.py
 ## 使用建议
 
 1. 一般而言一个产品的用户数量越多生命力就越强，但某些特殊情况下用户数量与生命力成反比。所以建议在自己的服务器上部署bharal，并尽量不要分享；
-2. 虽然反向代理了POST方法并处理了cookie中的path，但出于账号安全的考虑，尽量不要在使用bharal时登录任何网站。
+2. 虽然反向代理了POST方法并处理了cookie中的path，但出于账号安全的考虑，尽量不要在使用bharal时登录任何网站；
+3. 本项目代码未经安全审计，无法保证安全性，故建议在Docker中运行，相关命令如下所示。
 
+```
+$ docker run -itd -p 4430:4430 --name bharal -v $PWD/bharal:/usr/src/bharal -w /usr/src/bharal python:3.6 /bin/bash
+$ docker exec -it bharal /bin/bash
+root@3db483e9f8f4:/usr/src/bharal# pip install -r requirements.txt
+root@3db483e9f8f4:/usr/src/bharal# nohup python bharal.py &
+root@3db483e9f8f4:/usr/src/bharal# exit
+```
 
 ## 下一步
 
