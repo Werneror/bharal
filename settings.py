@@ -23,7 +23,7 @@ SCHEME = 'https'
 DOMAIN = '127.0.0.1'    # Modify this
 BIND_IP = '0.0.0.0'
 PORT = 4430   # Modify this
-SERVER = '{}://{}:{}/'.format(SCHEME, DOMAIN, PORT)
+SERVER = '{}://{}:{}/'.format(SCHEME, DOMAIN, PORT)    # Modify this if use Ningx as a reverse proxy
 
 # Modify and add users
 USERS = {
