@@ -49,6 +49,7 @@ class Proxy(object):
         self.modify_request_header('Origin', self.site)
         self.modify_request_header('Host', self.netloc)
         self.modify_request_header('Accept-Encoding', 'identity')
+        self.modify_request_header('Connection', 'close')
 
     def process_response(self, r):
         """
@@ -66,6 +67,7 @@ class Proxy(object):
             self.revision_set_cookie(r.headers._store['set-cookie'][1])
         self.handler.send_header('Content-Length', len(content))
         self.handler.send_header('Access-Control-Allow-Origin', '*')
+        self.handler.send_header('Connection', 'close')
         self.handler.end_headers()
         self.handler.wfile.write(content)
 
